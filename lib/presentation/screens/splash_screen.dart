@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async{
     await Future.delayed(const Duration(seconds: 2));
-    Get.to(() => const EmailVerificationScreen());
+    Get.off(() => const HomeScreen());
   }
 
   @override

@@ -1,13 +1,11 @@
 import 'package:crafty_bay_ecommerce/presentation/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 
-
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
 
   @override
-  State<CompleteProfileScreen> createState() =>
-      _CompleteProfileScreenState();
+  State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
 }
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
@@ -15,7 +13,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final TextEditingController _lastTEController = TextEditingController();
   final TextEditingController _mobileTEController = TextEditingController();
   final TextEditingController _cityTEController = TextEditingController();
-  final TextEditingController _shippingAddressTEController = TextEditingController();
+  final TextEditingController _shippingAddressTEController =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -50,14 +49,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   height: 24,
                 ),
                 _buildCompleteProfileFrom(),
-
                 const SizedBox(
                   height: 16,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   child: const Text('Complete'),
                 ),
               ],
@@ -72,44 +68,52 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     return Form(
       key: _formKey,
       child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _firstTEController,
-                        decoration: const InputDecoration(
-                          hintText: 'First Name',
-                        ),
-                      ),
-                      const SizedBox(height: 8,),
-                      TextFormField(
-                        controller: _lastTEController,
-                        decoration: const InputDecoration(
-                          hintText: 'Last Name',
-                        ),
-                      ),
-                      const SizedBox(height: 8,),
-                      TextFormField(
-                        controller: _mobileTEController,
-                        decoration: const InputDecoration(
-                          hintText: 'Mobile',
-                        ),
-                      ),
-                      const SizedBox(height: 8,),
-                      TextFormField(
-                        controller: _cityTEController,
-                        decoration: const InputDecoration(
-                          hintText: 'City',
-                        ),
-                      ),
-                      const SizedBox(height: 8,),
-                      TextFormField(
-                        controller: _shippingAddressTEController,
-                        maxLines: 3,
-                        decoration: const InputDecoration(
-                          hintText: 'Shipping address',
-                        ),
-                      ),
-                    ],
-                  ),
+        children: [
+          TextFormField(
+            controller: _firstTEController,
+            decoration: const InputDecoration(
+              hintText: 'First Name',
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          TextFormField(
+            controller: _lastTEController,
+            decoration: const InputDecoration(
+              hintText: 'Last Name',
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          TextFormField(
+            controller: _mobileTEController,
+            decoration: const InputDecoration(
+              hintText: 'Mobile',
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          TextFormField(
+            controller: _cityTEController,
+            decoration: const InputDecoration(
+              hintText: 'City',
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          TextFormField(
+            controller: _shippingAddressTEController,
+            maxLines: 3,
+            decoration: const InputDecoration(
+              hintText: 'Shipping address',
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -20,6 +20,15 @@ class _CraftyBayState extends State<CraftyBay> {
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: AppColors.primaryColor,
         ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.primaryColor,
+          )
+        ),
         textTheme: _textTheme(),
         inputDecorationTheme: _inputDecorationTheme(),
         elevatedButtonTheme: ElevatedButtonThemeData(
