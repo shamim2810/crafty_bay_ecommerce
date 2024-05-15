@@ -1,3 +1,4 @@
+import 'package:crafty_bay_ecommerce/controller_binder.dart';
 import 'package:crafty_bay_ecommerce/presentation/screens/splash_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/utility/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class _CraftyBayState extends State<CraftyBay> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       home: const SplashScreen(),
+      initialBinding: ControllerBinder(),
       theme: ThemeData(
         colorSchemeSeed: AppColors.primaryColor,
         progressIndicatorTheme: const ProgressIndicatorThemeData(
