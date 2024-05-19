@@ -42,15 +42,12 @@ class _CartProductItemState extends State<CartProductItem> {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildProductName(),
-                  _buildColorAndSize()
-                ],
+                children: [_buildProductName(), _buildColorAndSize()],
               ),
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(Icons.delete_outline_sharp),
+              icon: const Icon(Icons.delete_outline_sharp),
             ),
           ],
         ),
@@ -74,41 +71,41 @@ class _CartProductItemState extends State<CartProductItem> {
 
   Widget _buildColorAndSize() {
     return const Wrap(
-                  spacing: 16,
-                  children: [
-                    Text(
-                      'Color: Red',
-                      style: TextStyle(
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Text(
-                      'Size: XL',
-                      style: TextStyle(
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ],
-                );
+      spacing: 16,
+      children: [
+        Text(
+          'Color: Red',
+          style: TextStyle(
+            color: Colors.black54,
+          ),
+        ),
+        Text(
+          'Size: XL',
+          style: TextStyle(
+            color: Colors.black54,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildCounter() {
     return ItemCount(
-            initialValue: _counterValue,
-            minValue: 1,
-            maxValue: 20,
-            decimalPlaces: 0,
-            color: AppColors.primaryColor,
-            onChanged: (value) {
-              print(value);
-              _counterValue = value as int;
-              setState(() {});
-            },
-          );
+      initialValue: _counterValue,
+      minValue: 1,
+      maxValue: 20,
+      decimalPlaces: 0,
+      color: AppColors.primaryColor,
+      onChanged: (value) {
+        print(value);
+        _counterValue = value as int;
+        setState(() {});
+      },
+    );
   }
 
   Widget _buildProductName() {
-    return Text(
+    return const Text(
       'Nike shoe 1236KG34',
       style: TextStyle(
           fontSize: 16, color: Colors.black, overflow: TextOverflow.ellipsis),
