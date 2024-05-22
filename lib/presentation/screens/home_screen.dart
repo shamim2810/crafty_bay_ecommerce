@@ -1,13 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/utility/app_colors.dart';
 import 'package:crafty_bay_ecommerce/presentation/utility/assets_path.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/app_bar_icon_button.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/category_item.dart';
+import 'package:crafty_bay_ecommerce/presentation/widgets/centered_circular_progress_indicator.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/home_carousel_slider.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/product_card.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,7 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const HomeCarouselSlider(),
+              GetBuilder<HomeSliderController>(builder: (sliderController) {
+                if (sliderController.inProgress) {
+                  return const SizedBox(
+                    height: 200,
+                    child: CenteredCircularProgressIndicator(),
+                  );
+                }
+                return HomeCarouselSlider(
+                    sliderList: sliderController.sliderList);
+              }),
               const SizedBox(
                 height: 16,
               ),
@@ -55,7 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               _buildProductListView(),
-              const SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               SectionHeader(
                 title: 'Special',
                 onTapSeeAll: () {},
@@ -64,7 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 10,
               ),
               _buildProductListView(),
-              const SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               SectionHeader(
                 title: 'New',
                 onTapSeeAll: () {},
@@ -168,5 +184,3 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 }
-
-
