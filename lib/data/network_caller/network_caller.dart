@@ -34,10 +34,7 @@ class NetworkCaller {
     } catch (e) {
       log(e.toString());
       return NetworkResponse(
-        responseCode: -1,
-        isSuccess: false,
-        errorMessage: e.toString(),
-      );
+          responseCode: -1, isSuccess: false, errorMessage: e.toString());
     }
   }
 
@@ -45,9 +42,8 @@ class NetworkCaller {
       {required String url, Map<String, dynamic>? body}) async {
     try {
       log(url);
-      final Response response = await post(Uri.parse(url),headers: {
-        'accept' : 'application/json'
-      }, body: body);
+      final Response response = await post(Uri.parse(url),
+          headers: {'accept': 'application/json'}, body: body);
       log(response.statusCode.toString());
       log(response.body.toString());
       if (response.statusCode == 200) {
@@ -71,16 +67,13 @@ class NetworkCaller {
     } catch (e) {
       log(e.toString());
       return NetworkResponse(
-        responseCode: -1,
-        isSuccess: false,
-        errorMessage: e.toString(),
-      );
+          responseCode: -1, isSuccess: false, errorMessage: e.toString());
     }
   }
 
   static void _goToSignInScreen() {
     // Navigator.push(
-    //   CraftyBay.navigatorKey.currentState!.context,
+    //   CraftyBay.navigationKey.currentState!.context,
     //   MaterialPageRoute(
     //     builder: (context) => const EmailVerificationScreen(),
     //   ),

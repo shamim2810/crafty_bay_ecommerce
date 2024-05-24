@@ -2,6 +2,7 @@ import 'package:crafty_bay_ecommerce/presentation/screens/cart_list_screen.dart'
 import 'package:crafty_bay_ecommerce/presentation/screens/category_list_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/screens/home_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/screens/wish_list_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/category_list_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/utility/app_colors.dart';
@@ -17,47 +18,46 @@ class MainBottomNavBarScreen extends StatefulWidget {
 
 class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
   final MainBottomNavBarController _navBarController =
-      Get.find<MainBottomNavBarController>();
+  Get.find<MainBottomNavBarController>();
+
   final List<Widget> _screens = const [
-     HomeScreen(),
-     CategoryListScreen(),
-     CartListScreen(),
-     WishListScreen(),
+    HomeScreen(),
+    CategoryListScreen(),
+    CartListScreen(),
+    WishListScreen(),
   ];
 
   @override
   void initState() {
     super.initState();
     Get.find<HomeSliderController>().getSliders();
+    Get.find<CategoryListController>().getCategoryList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<MainBottomNavBarController>(
-        builder: (_){
+        builder: (_) {
           return _screens[_navBarController.selectedIndex];
         },
       ),
       bottomNavigationBar: GetBuilder<MainBottomNavBarController>(
-        builder: (_) {
-          return BottomNavigationBar(
+          builder: (_) {
+            return BottomNavigationBar(
               currentIndex: _navBarController.selectedIndex,
               onTap: _navBarController.changeIndex,
               selectedItemColor: AppColors.primaryColor,
               unselectedItemColor: Colors.grey,
               showUnselectedLabels: true,
               items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.home_filled), label: 'Home'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.category), label: 'Category'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_cart), label: 'Cart'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_outline_rounded), label: 'Wishlist'),
-              ]);
-        }
+                BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+                BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Category'),
+                BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+                BottomNavigationBarItem(icon: Icon(Icons.favorite_outline_rounded), label: 'Wishlist'),
+              ],
+            );
+          }
       ),
     );
   }
