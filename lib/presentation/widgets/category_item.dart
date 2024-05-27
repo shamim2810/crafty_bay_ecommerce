@@ -18,7 +18,11 @@ class CategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(
-                () => ProductListScreen(categoryName: category.categoryName ?? ''));
+          () => ProductListScreen(
+            categoryName: category.categoryName ?? '',
+            categoryId: category.id!,
+          ),
+        );
       },
       child: Column(
         children: [
@@ -31,8 +35,7 @@ class CategoryItem extends StatelessWidget {
                 url: category.categoryImg ?? '',
                 height: 30,
                 widget: 30,
-              )
-          ),
+              )),
           const SizedBox(height: 8),
           Text(
             category.categoryName ?? '',
