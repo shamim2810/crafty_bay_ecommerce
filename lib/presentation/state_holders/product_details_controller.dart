@@ -5,7 +5,7 @@ import 'package:crafty_bay_ecommerce/data/network_caller/network_caller.dart';
 import 'package:crafty_bay_ecommerce/data/utility/urls.dart';
 import 'package:get/get.dart';
 
-class ProductDetailsController extends GetxController{
+class ProductDetailsController extends GetxController {
   bool _inProgress = false;
   String _errorMessage = '';
   ProductDetailsModel _productDetailsModel = ProductDetailsModel();
@@ -16,14 +16,14 @@ class ProductDetailsController extends GetxController{
 
   String get errorMessage => _errorMessage;
 
-  Future<bool> getProductDetails(int categoryId) async {
+  Future<bool> getProductDetails(int productId) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-        url: Urls.productListByCategory(categoryId));
+        url: Urls.productDetails(productId));
     if (response.isSuccess) {
-      if(_errorMessage.isNotEmpty){
+      if (_errorMessage.isNotEmpty) {
         _errorMessage = '';
       }
       _productDetailsModel =

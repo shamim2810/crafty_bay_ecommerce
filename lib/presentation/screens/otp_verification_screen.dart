@@ -1,6 +1,9 @@
 import 'package:crafty_bay_ecommerce/presentation/screens/complete_profile_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/verify_otp_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/utility/app_colors.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/app_logo.dart';
+import 'package:crafty_bay_ecommerce/presentation/widgets/centered_circular_progress_indicator.dart';
+import 'package:crafty_bay_ecommerce/presentation/widgets/snack_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -20,52 +23,51 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 100,
-                ),
+                const SizedBox(height: 100),
                 const AppLogo(),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Enter OTP Code',
-                  style: textTheme.headlineLarge,
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  'A 4 digit OTP code has been sent',
-                  style: textTheme.headlineSmall,
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 16),
+                Text('Enter OTP Code', style: textTheme.headlineLarge),
+                const SizedBox(height: 4),
+                Text('A 4 digit OTP code has been sent',
+                    style: textTheme.headlineSmall),
+                const SizedBox(height: 24),
                 _buildPinField(),
-                const SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => const CompleteProfileScreen());
-                  },
-                  child: const Text('Next'),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 16),
+                GetBuilder<VerifyOtpController>(builder: (verifyOtpController) {
+                  if (verifyOtpController.inProgress) {
+                    return const CenteredCircularProgressIndicator();
+                  }
+
+                  return ElevatedButton(
+                    onPressed: () async {
+                      final result = await verifyOtpController.verifyOtp(
+                          widget.email, _otpTEController.text);
+                      if (result) {
+                        Get.to(() => const CompleteProfileScreen());
+                      } else {
+                        if (mounted) {
+                          showSnackMessage(
+                              context, verifyOtpController.errorMessage);
+                        }
+                      }
+                    },
+                    child: const Text('Next'),
+                  );
+                }),
+                const SizedBox(height: 24),
                 _buildResendCodeMessage(),
                 TextButton(
                   onPressed: () {},
                   child: const Text('Resend Code'),
-                ),
+                )
               ],
             ),
           ),
@@ -76,24 +78,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   Widget _buildResendCodeMessage() {
     return RichText(
-            text: const TextSpan(
-              children: [
-                TextSpan(
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    text: 'This code will expire in '),
-                //TODO : complete this count down
-                TextSpan(
-                  text: '120s',
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-              ],
-            ),
-          );
+      text: const TextSpan(
+        style: TextStyle(
+          color: Colors.grey,
+          fontWeight: FontWeight.w500,
+        ),
+        children: [
+          TextSpan(text: 'This code will expire in '),
+          // TODO: complete this count down
+          TextSpan(
+              text: '100s', style: TextStyle(color: AppColors.primaryColor)),
+        ],
+      ),
+    );
   }
 
   Widget _buildPinField() {

@@ -57,14 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 10),
               GetBuilder<CategoryListController>(
                   builder: (categoryListController) {
-                if (categoryListController.inProgress) {
-                  return const SizedBox(
-                      height: 130, child: CenteredCircularProgressIndicator());
-                }
+                    if (categoryListController.inProgress) {
+                      return const SizedBox(
+                          height: 100, child: CenteredCircularProgressIndicator());
+                    }
 
-                return _buildCategoryListView(
-                    categoryListController.categoryList);
-              }),
+                    return _buildCategoryListView(
+                        categoryListController.categoryList);
+                  }),
               const SizedBox(height: 8),
               SectionHeader(
                 title: 'Popular',
@@ -72,17 +72,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
               GetBuilder<PopularProductListController>(
-                  builder: (popularProductListController) {
-                if (popularProductListController.popularProductInProgress) {
-                  return const SizedBox(
-                    height: 210,
-                    child: CenteredCircularProgressIndicator(),
+                builder: (popularProductListController) {
+                  if (popularProductListController.popularProductInProgress) {
+                    return const SizedBox(
+                      height: 210,
+                      child: CenteredCircularProgressIndicator(),
+                    );
+                  }
+                  return _buildProductListView(
+                    popularProductListController.productList,
                   );
-                }
-                return _buildProductListView(
-                  popularProductListController.productList,
-                );
-              }),
+                },
+              ),
               const SizedBox(height: 8),
               SectionHeader(
                 title: 'Special',
@@ -90,17 +91,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
               GetBuilder<SpecialProductListController>(
-                  builder: (specialProductListController) {
-                if (specialProductListController.inProgress) {
-                  return const SizedBox(
-                    height: 210,
-                    child: CenteredCircularProgressIndicator(),
+                builder: (specialProductListController) {
+                  if (specialProductListController.inProgress) {
+                    return const SizedBox(
+                      height: 210,
+                      child: CenteredCircularProgressIndicator(),
+                    );
+                  }
+                  return _buildProductListView(
+                    specialProductListController.productList,
                   );
-                }
-                return _buildProductListView(
-                  specialProductListController.productList,
-                );
-              }),
+                },
+              ),
               const SizedBox(height: 8),
               SectionHeader(
                 title: 'New',
@@ -108,17 +110,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
               GetBuilder<NewProductListController>(
-                  builder: (newProductListController) {
-                if (newProductListController.inProgress) {
-                  return const SizedBox(
-                    height: 210,
-                    child: CenteredCircularProgressIndicator(),
+                builder: (newProductListController) {
+                  if (newProductListController.inProgress) {
+                    return const SizedBox(
+                      height: 210,
+                      child: CenteredCircularProgressIndicator(),
+                    );
+                  }
+                  return _buildProductListView(
+                    newProductListController.productList,
                   );
-                }
-                return _buildProductListView(
-                  newProductListController.productList,
-                );
-              }),
+                },
+              ),
             ],
           ),
         ),
@@ -130,18 +133,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: categoryList
-            .map(
-              (e) => Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CategoryItem(category: e),
-                  const SizedBox(
-                    width: 16,
-                  )
-                ],
-              ),
-            ).toList(),
+        children: categoryList.map((e) => Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CategoryItem(category: e),
+            const SizedBox(
+              width: 16,
+            )
+          ],
+        )).toList(),
       ),
     );
   }

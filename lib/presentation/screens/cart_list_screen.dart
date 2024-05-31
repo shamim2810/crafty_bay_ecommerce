@@ -17,10 +17,6 @@ class _CartListScreenState extends State<CartListScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      // onWillPop: ()async{
-      //   Get.find<MainBottomNavBarController>().backToHome();
-      //   return false;
-      // },
       canPop: false,
       onPopInvoked: (_) {
         Get.find<MainBottomNavBarController>().backToHome();
@@ -29,10 +25,11 @@ class _CartListScreenState extends State<CartListScreen> {
         appBar: AppBar(
           title: const Text('Carts'),
           leading: IconButton(
-              onPressed: () {
-                Get.find<MainBottomNavBarController>().backToHome();
-              },
-              icon: const Icon(Icons.arrow_back_ios_sharp)),
+            onPressed: () {
+              Get.find<MainBottomNavBarController>().backToHome();
+            },
+            icon: const Icon(Icons.arrow_back_ios_sharp),
+          ),
         ),
         body: Column(
           children: [
@@ -78,21 +75,18 @@ class _CartListScreenState extends State<CartListScreen> {
 
   Widget _buildTotalPriceWidget() {
     return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Total Price',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.grey,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
         ),
         Text(
           '\$1200',
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: AppColors.primaryColor,
-            fontSize: 24,
-          ),
+              fontSize: 24,
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.bold),
         ),
       ],
     );

@@ -22,37 +22,39 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Category'),
+          title: const Text('Category list'),
           leading: IconButton(
-              onPressed: () {
-                Get.find<MainBottomNavBarController>().backToHome();
-              },
-              icon: const Icon(Icons.arrow_back_ios_sharp)),
+            onPressed: () {
+              Get.find<MainBottomNavBarController>().backToHome();
+            },
+            icon: const Icon(Icons.arrow_back_ios_sharp),
+          ),
         ),
         body: GetBuilder<CategoryListController>(
             builder: (categoryListController) {
-              if(categoryListController.inProgress){
+              if (categoryListController.inProgress) {
                 return const CenteredCircularProgressIndicator();
               }
-          return RefreshIndicator(
-            onRefresh: categoryListController.getCategoryList,
-            child: GridView.builder(
-              itemCount: categoryListController.categoryList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                childAspectRatio: 0.72,
-              ),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CategoryItem(
-                    category: categoryListController.categoryList[index],
+
+              return RefreshIndicator(
+                onRefresh: categoryListController.getCategoryList,
+                child: GridView.builder(
+                  itemCount: categoryListController.categoryList.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    childAspectRatio: 0.72,
                   ),
-                );
-              },
-            ),
-          );
-        }),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CategoryItem(
+                        category: categoryListController.categoryList[index],
+                      ),
+                    );
+                  },
+                ),
+              );
+            }),
       ),
     );
   }
