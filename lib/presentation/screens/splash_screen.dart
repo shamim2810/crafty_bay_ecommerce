@@ -1,6 +1,7 @@
 import 'package:crafty_bay_ecommerce/presentation/screens/email_verification_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/screens/home_screen.dart';
 import 'package:crafty_bay_ecommerce/presentation/screens/main_bottom_nav_bar_screen.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/user_aurh_controller.dart';
 import 'package:crafty_bay_ecommerce/presentation/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _moveToNextScreen() async{
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
+    await UserAuthController.checkLoggedInState();
     Get.off(() => const MainBottomNavBarScreen());
   }
 

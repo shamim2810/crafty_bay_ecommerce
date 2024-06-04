@@ -4,6 +4,7 @@ import 'package:crafty_bay_ecommerce/data/models/category_list_model.dart';
 import 'package:crafty_bay_ecommerce/data/models/network_response.dart';
 import 'package:crafty_bay_ecommerce/data/network_caller/network_caller.dart';
 import 'package:crafty_bay_ecommerce/data/utility/urls.dart';
+import 'package:crafty_bay_ecommerce/presentation/state_holders/user_aurh_controller.dart';
 import 'package:get/get.dart';
 
 class VerifyOtpController extends GetxController {
@@ -22,6 +23,7 @@ class VerifyOtpController extends GetxController {
       url: Urls.verifyOtp(email, otp),
     );
     if (response.isSuccess) {
+      await UserAuthController.saveUserToken(response.responseData['data']);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
