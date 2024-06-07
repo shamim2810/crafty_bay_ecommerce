@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.network(
-                      product.brand?.brandImg ?? '',
+                      product.image ?? '',
                   ),
                 ),
               ),
@@ -82,7 +82,7 @@ class ProductCard extends StatelessWidget {
                             Text('${product.star}'),
                           ],
                         ),
-                        WishButton(showAddToWishlist: showAddToWishlist),
+                        //WishButton(showAddToWishlist: showAddToWishlist),
                       ],
                     ),
                   ],

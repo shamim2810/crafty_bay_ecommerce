@@ -2,16 +2,27 @@ import 'package:crafty_bay_ecommerce/presentation/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class WishButton extends StatelessWidget {
-  const WishButton({super.key, this.showAddToWishlist = true});
+  const WishButton(
+      {super.key,
+      this.showAddToWishlist = true,
+      this.isSelected = false,
+      required this.onTap});
 
   final bool showAddToWishlist;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
       visible: showAddToWishlist,
       replacement: _getIconButton(Icons.delete_outline),
-      child: _getIconButton(Icons.favorite_outline_rounded),
+      child: InkWell(
+        onTap: onTap,
+        child: _getIconButton(
+          _getIconData(),
+        ),
+      ),
     );
   }
 
@@ -27,5 +38,9 @@ class WishButton extends StatelessWidget {
         color: Colors.white,
       ),
     );
+  }
+
+  IconData _getIconData() {
+    return isSelected ? Icons.favorite : Icons.favorite_outline_rounded;
   }
 }
